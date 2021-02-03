@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.dizcoding.popularmovies.BuildConfig
+import com.dizcoding.core.BuildConfig.IMDB_IMG_URL
+import com.dizcoding.core.domain.model.Movie
+import com.dizcoding.core.utils.SinggleClickEvent
 import com.dizcoding.popularmovies.R
-import com.dizcoding.popularmovies.core.domain.model.Movie
-import com.dizcoding.popularmovies.core.utils.SinggleClickEvent
 import com.dizcoding.popularmovies.databinding.ActivityDetailBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -66,17 +66,17 @@ class DetailActivity : AppCompatActivity(), SinggleClickEvent {
         if (movies.isNotEmpty()) {
             val movie = movies[0]
             movieDetailData = movie
-            binding.tvLang.text = StringBuilder("Lang : ${movie?.original_language}")
-            binding.tvDate.text = StringBuilder("Release Date : ${movie?.release_date}")
-            binding.tvRate.text = StringBuilder("Rate : ${movie?.vote_average}")
-            binding.tvTitleFilm.text = movie?.title
-            binding.tvDescription.text = movie?.overview
+            binding.tvLang.text = StringBuilder("Lang : ${movie.original_language}")
+            binding.tvDate.text = StringBuilder("Release Date : ${movie.release_date}")
+            binding.tvRate.text = StringBuilder("Rate : ${movie.vote_average}")
+            binding.tvTitleFilm.text = movie.title
+            binding.tvDescription.text = movie.overview
             Glide
                 .with(this)
-                .load(BuildConfig.IMDB_IMG_URL + movie?.backdrop_path)
+                .load(IMDB_IMG_URL + movie.backdrop_path)
                 .fitCenter()
                 .into(binding.ivPoster)
-            movie?.isFavorit?.let { isVaforite ->
+            movie.isFavorit?.let { isVaforite ->
                 thisMovieVaforite = isVaforite
                 if (isVaforite) binding.vBookmark.background =
                     resources.getDrawable(R.drawable.vector_bookmarked)

@@ -7,7 +7,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.dizcoding.popularmovies.R
 import com.dizcoding.popularmovies.movie.MovieFragment
-import com.dizcoding.popularmovies.vaforite.VaforiteFragment
 
 class HomePagerAdapter(private val mContext: Context, fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
@@ -19,7 +18,7 @@ class HomePagerAdapter(private val mContext: Context, fm: FragmentManager) : Fra
     override fun getItem(position: Int): Fragment =
         when (position) {
             0 -> MovieFragment()
-            1 -> VaforiteFragment()
+            1 -> instantiateFragment("com.dizcoding.favorite.VaforiteFragment")
             else -> Fragment()
         }
 
@@ -27,4 +26,11 @@ class HomePagerAdapter(private val mContext: Context, fm: FragmentManager) : Fra
 
     override fun getCount(): Int = TAB_TITLES.size
 
+    private fun instantiateFragment(className: String) : Fragment {
+        return try {
+            Class.forName(className).newInstance() as Fragment
+        } catch (e: Exception) {
+            Fragment()
+        }
+    }
 }

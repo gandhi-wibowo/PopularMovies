@@ -1,9 +1,9 @@
 package com.dizcoding.popularmovies
 
 import android.app.Application
-import com.dizcoding.popularmovies.core.di.databaseModule
-import com.dizcoding.popularmovies.core.di.networkModule
-import com.dizcoding.popularmovies.core.di.repositoryModule
+import com.dizcoding.core.di.databaseModule
+import com.dizcoding.core.di.networkModule
+import com.dizcoding.core.di.repositoryModule
 import com.dizcoding.popularmovies.di.useCaseModule
 import com.dizcoding.popularmovies.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
