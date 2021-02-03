@@ -20,12 +20,18 @@ android {
 
         buildConfigField("String", "IMDB_TOKEN", '"0339a3a525cc3205e63768f56549664e"')
         buildConfigField("String", "IMDB_BASE_URL", '"https://api.themoviedb.org/3/movie/"')
+        buildConfigField("String", "IMDB_HOSTNAME", '"api.themoviedb.org"')
+        buildConfigField("String", "IMDB_HOSTNAME_PIN", '"sha256/+vqZVAzTqUP8BGkfl88yU7SQ3C8J2uNEa55B7RZjEg0="')
         buildConfigField("String", "IMDB_IMG_URL", '"https://image.tmdb.org/t/p/original"')
     }
 
     buildTypes {
         release {
             minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -48,6 +54,9 @@ dependencies {
     // room
     implementation "androidx.room:room-runtime:2.2.6"
     kapt "androidx.room:room-compiler:2.2.6"
+
+    implementation "net.zetetic:android-database-sqlcipher:4.4.0"
+    implementation "androidx.sqlite:sqlite-ktx:2.1.0"
 
     // retrofit
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
